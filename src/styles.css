@@ -54,7 +54,6 @@ button { font-family: inherit; }
 
 /* ───────── 홈 ───────── */
 .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
-.tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--acc) !important; background: var(--acc-soft); padding: 2px 8px; border-radius: 99px; vertical-align: 1px; }
 
 .group { padding-top: 48px; }
 .group:first-child { padding-top: 36px; }
