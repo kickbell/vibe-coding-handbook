@@ -50,15 +50,13 @@ const go = (id) => (e) => {
 export default function Home() {
   const active = useActiveGroup()
   const activeGroup = GROUPS.find((g) => g.id === active)
-  const total = GROUPS.reduce((n, g) => n + g.sections.reduce((m, s) => m + s.items.length, 0), 0)
 
   return (
     <>
       <header className="topbar">
         <div className="topbar-in">
           <Link to="/" className="logo">
-            <span className="logo-mark" />
-            바이브코딩 용어 도감
+            VIBE CODING HANDBOOK
           </Link>
           <nav className="group-tabs">
             {GROUPS.map((g) => (
@@ -82,30 +80,6 @@ export default function Home() {
       </header>
 
       <main className="wrap">
-        <section className="intro">
-          <span className="eyebrow">VIBE CODING HANDBOOK</span>
-          <h1>
-            보면 아는데,
-            <br />
-            이름을 몰랐던 것들.
-          </h1>
-          <p>
-            AI에게 정확히 말하려면 이름을 알아야 해요. 움직이는 카드를 훑어보다가 <br className="br-pc" />
-            "아, 이거!" 싶은 게 보이면 눌러보세요. 직접 만져보고, AI에게 할 말까지 복사할 수 있어요.
-          </p>
-          <div className="intro-stats">
-            <span>
-              <b>{total}</b>개 용어
-            </span>
-            <span>
-              <b>{GROUPS.length}</b>개 분류
-            </span>
-            <span>
-              <b className="tag">체험</b> 직접 조작 가능
-            </span>
-          </div>
-        </section>
-
         {GROUPS.map((g) => (
           <section key={g.id} id={g.id} className="group">
             <div className="group-head">

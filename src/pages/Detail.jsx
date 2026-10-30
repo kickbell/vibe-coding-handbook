@@ -33,8 +33,7 @@ export default function Detail() {
       <header className="topbar">
         <div className="topbar-in">
           <Link to="/" className="logo">
-            <span className="logo-mark" />
-            바이브코딩 용어 도감
+            VIBE CODING HANDBOOK
           </Link>
           <Link to={`/#${term.section.id}`} className="back">
             ← 전체 용어
