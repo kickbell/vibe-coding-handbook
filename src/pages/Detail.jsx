@@ -48,14 +48,7 @@ export default function Detail() {
             {term.ko}
             {term.adv && <span className="lv">알면 좋음</span>}
           </p>
-          {term.aka.length > 0 && (
-            <p className="detail-aka">
-              <span>다른 이름</span>
-              {term.aka.map((a) => (
-                <b key={a}>{a}</b>
-              ))}
-            </p>
-          )}
+          {term.aka.length > 0 && <p className="detail-aka">{term.aka.map((a) => `'${a}'`).join(', ')}(으)로도 불려요</p>}
           <p className="detail-desc">{term.desc}</p>
         </motion.div>
 

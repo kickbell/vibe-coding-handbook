@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { GROUPS, searchTerms } from '../terms'
-import { Stage, Icon, Check } from '../demos/parts'
+import { Stage, Icon } from '../demos/parts'
 
 export function TermCard({ term, alias }) {
   const { Demo } = term
@@ -25,8 +25,7 @@ export function TermCard({ term, alias }) {
   )
 }
 
-const visible = (items, basicOnly) => items.filter((t) => !basicOnly || !t.adv)
-const count = (g, basicOnly) => g.sections.reduce((m, s) => m + visible(s.items, basicOnly).length, 0)
+const count = (g) => g.sections.reduce((m, s) => m + s.items.length, 0)
 
 function useActiveGroup() {
   const [active, setActive] = useState(GROUPS[0].id)
@@ -46,27 +45,10 @@ function useActiveGroup() {
   return active
 }
 
-const PREF = 'basicOnly'
-function readPref() {
-  try {
-    return localStorage.getItem(PREF) === '1'
-  } catch {
-    return false
-  }
-}
-function writePref(v) {
-  try {
-    localStorage.setItem(PREF, v ? '1' : '0')
-  } catch {
-    /* 저장 못 해도 동작에는 문제없음 */
-  }
-}
-
 export default function Home() {
   const active = useActiveGroup()
   const activeGroup = GROUPS.find((g) => g.id === active)
   const [q, setQ] = useState('')
-  const [basicOnly, setBasicOnly] = useState(readPref)
   const hits = q.trim() ? searchTerms(q) : null
 
   const go = (id) => (e) => {
@@ -76,10 +58,6 @@ export default function Home() {
       const el = document.getElementById(id)
       if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 124, behavior: 'smooth' })
     })
-  }
-  const toggleBasic = () => {
-    writePref(!basicOnly)
-    setBasicOnly(!basicOnly)
   }
 
   return (
@@ -96,7 +74,7 @@ export default function Home() {
                 <a key={g.id} href={'#' + g.id} onClick={go(g.id)} className={on ? 'on' : ''}>
                   {on && <motion.span layoutId="gt" className="group-tab-bg" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
                   <span style={{ position: 'relative' }}>
-                    {g.short} <b className="mono">{count(g, basicOnly)}</b>
+                    {g.short} <b className="mono">{count(g)}</b>
                   </span>
                 </a>
               )
@@ -114,20 +92,12 @@ export default function Home() {
         </div>
         <div className="sub-tabs">
           {!hits &&
-            activeGroup.sections.map((s) => {
-              const n = visible(s.items, basicOnly).length
-              if (!n) return null
-              return (
-                <a key={s.id} href={'#' + s.id} onClick={go(s.id)}>
-                  {s.title}
-                  <span className="mono">{n}</span>
-                </a>
-              )
-            })}
-          <button className={'basic-toggle' + (basicOnly ? ' on' : '')} onClick={toggleBasic}>
-            <span className="bt-box">{basicOnly && <Check size={10} color="#fff" width={3.6} />}</span>
-            기본만 보기
-          </button>
+            activeGroup.sections.map((s) => (
+              <a key={s.id} href={'#' + s.id} onClick={go(s.id)}>
+                {s.title}
+                <span className="mono">{s.items.length}</span>
+              </a>
+            ))}
         </div>
       </header>
 
@@ -154,29 +124,25 @@ export default function Home() {
             <section key={g.id} id={g.id} className="group">
               <div className="group-head">
                 <h2>
-                  {g.title} <span className="mono">{count(g, basicOnly)}</span>
+                  {g.title} <span className="mono">{count(g)}</span>
                 </h2>
                 <p>{g.intro}</p>
               </div>
-              {g.sections.map((s) => {
-                const items = visible(s.items, basicOnly)
-                if (!items.length) return null
-                return (
-                  <div key={s.id} id={s.id} className="section">
-                    <div className="section-head">
-                      <h3>
-                        {s.title} <span className="mono">{items.length}</span>
-                      </h3>
-                      <span className="section-en mono">{s.en.toUpperCase()}</span>
-                    </div>
-                    <div className="grid">
-                      {items.map((t) => (
-                        <TermCard key={t.id} term={t} />
-                      ))}
-                    </div>
+              {g.sections.map((s) => (
+                <div key={s.id} id={s.id} className="section">
+                  <div className="section-head">
+                    <h3>
+                      {s.title} <span className="mono">{s.items.length}</span>
+                    </h3>
+                    <span className="section-en mono">{s.en.toUpperCase()}</span>
                   </div>
-                )
-              })}
+                  <div className="grid">
+                    {s.items.map((t) => (
+                      <TermCard key={t.id} term={t} />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </section>
           ))
         )}
