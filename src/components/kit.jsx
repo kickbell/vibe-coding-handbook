@@ -114,3 +114,22 @@ export function Toggle({ label, value, onChange }) {
     </button>
   )
 }
+
+// 체험 화면 공통 틀: 무대 + 조절판 + 이벤트 로그 + 프롬프트
+export function Shell({ stage, controls, log, prompt, hint }) {
+  return (
+    <div className="pg">
+      <div className="pg-main">
+        <div className="pg-stage">
+          {stage}
+          {hint && <span className="pg-hint">{hint}</span>}
+        </div>
+        <div className="pg-controls">{controls}</div>
+      </div>
+      <div className="pg-bottom">
+        {log}
+        <PromptBox text={prompt} />
+      </div>
+    </div>
+  )
+}

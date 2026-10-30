@@ -46,7 +46,6 @@ export default function Detail() {
           <h1>{term.en}</h1>
           <p className="detail-ko">
             {term.ko}
-            {term.adv && <span className="lv">알면 좋음</span>}
           </p>
           {term.aka.length > 0 && <p className="detail-aka">{term.aka.map((a) => `'${a}'`).join(', ')}(으)로도 불려요</p>}
           <p className="detail-desc">{term.desc}</p>

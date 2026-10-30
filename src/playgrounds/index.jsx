@@ -1,27 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, AnimatePresence, animate, useMotionValue } from 'motion/react'
-import { PromptBox, EventLog, useEventLog, Slider, Segmented, Toggle } from '../components/kit'
+import { Shell, EventLog, useEventLog, Slider, Segmented, Toggle } from '../components/kit'
+import { COMPONENT_PGS } from './components'
+import { EFFECT_PGS } from './effects'
+import { MOTION_PGS } from './motion'
+import { TEXT_PGS } from './text'
+import { SCREEN_PGS } from './screen'
 
 const EASE_OUT = [0.22, 1, 0.36, 1]
 const PALETTE = ['#4D9CFF', '#FF7A59', '#2EC4A0', '#FFC43D', '#FF6FA5']
-
-function Shell({ stage, controls, log, prompt, hint }) {
-  return (
-    <div className="pg">
-      <div className="pg-main">
-        <div className="pg-stage">
-          {stage}
-          {hint && <span className="pg-hint">{hint}</span>}
-        </div>
-        <div className="pg-controls">{controls}</div>
-      </div>
-      <div className="pg-bottom">
-        {log}
-        <PromptBox text={prompt} />
-      </div>
-    </div>
-  )
-}
 
 /* ───────── Accordion ───────── */
 
@@ -352,4 +339,14 @@ function SpringPG() {
   )
 }
 
-export const PLAYGROUNDS = { accordion: AccordionPG, stagger: StaggerPG, spring: SpringPG }
+// 용어 id → 체험 화면
+export const PLAYGROUNDS = {
+  accordion: AccordionPG,
+  stagger: StaggerPG,
+  spring: SpringPG,
+  ...COMPONENT_PGS,
+  ...EFFECT_PGS,
+  ...MOTION_PGS,
+  ...TEXT_PGS,
+  ...SCREEN_PGS,
+}

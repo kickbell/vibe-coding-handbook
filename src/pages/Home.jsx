@@ -15,7 +15,6 @@ export function TermCard({ term, alias }) {
         <div className="card-title">
           <h4>{term.en}</h4>
           {term.playground && <span className="tag">체험</span>}
-          {term.adv && <span className="lv">알면 좋음</span>}
         </div>
         <p>{term.ko}</p>
         {alias && <p className="card-alias">'{alias}'(으)로도 불려요</p>}
