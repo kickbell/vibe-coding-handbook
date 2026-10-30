@@ -97,7 +97,7 @@ button { font-family: inherit; }
 .detail-aka span { color: var(--faint); font-weight: 600; margin-right: 2px; }
 .detail-aka b { font-weight: 600; color: #57534b; background: #fff; border: 1px solid var(--line); padding: 3px 10px; border-radius: 99px; }
 .detail-ko .lv { margin-left: 8px; vertical-align: 3px; }
-.detail-desc { font-size: 17px; line-height: 1.75; color: #45423c; max-width: 700px; margin: 0; }
+.detail-desc { font-size: 17px; line-height: 1.8; color: #45423c; max-width: 720px; margin: 0; }
 .detail-block { margin-top: 36px; }
 .detail-block h2 { font-size: 20px; font-weight: 750; letter-spacing: -0.02em; margin: 0 0 14px; }
 .detail-demo { background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 16px; }
