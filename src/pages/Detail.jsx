@@ -44,7 +44,18 @@ export default function Detail() {
             {term.group.title} · {term.section.title} <span className="mono">{term.no}</span>
           </span>
           <h1>{term.en}</h1>
-          <p className="detail-ko">{term.ko}</p>
+          <p className="detail-ko">
+            {term.ko}
+            {term.adv && <span className="lv">알면 좋음</span>}
+          </p>
+          {term.aka.length > 0 && (
+            <p className="detail-aka">
+              <span>다른 이름</span>
+              {term.aka.map((a) => (
+                <b key={a}>{a}</b>
+              ))}
+            </p>
+          )}
           <p className="detail-desc">{term.desc}</p>
         </motion.div>
 

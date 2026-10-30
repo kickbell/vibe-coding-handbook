@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion, AnimatePresence, animate, useMotionValue, useTransform } from 'motion/react'
-import { C, PALETTE, ease, rand, useStep, useTick, L, Win, NavBar, Cursor, Check, CartIcon } from './parts'
+import { C, PALETTE, ease, rand, useStep, useTick, L, Win, NavBar, Cursor, Check, CartIcon, Icon } from './parts'
 
 const MiniCard = ({ children, style, ...p }) => (
   <motion.div className="m-card" style={style} {...p}>
@@ -564,6 +564,67 @@ export function Confetti() {
         </span>
         결제 완료
       </motion.div>
+    </div>
+  )
+}
+
+/* ───────── 추가: 피드백 ───────── */
+
+const RIPPLE_AT = [
+  [56, 22],
+  [140, 16],
+  [96, 30],
+  [30, 14],
+]
+export function Ripple() {
+  const k = useTick(1300)
+  const [px, py] = RIPPLE_AT[k % RIPPLE_AT.length]
+  return (
+    <>
+      <div className="center">
+        <div className="rp-btn">
+          <span style={{ position: 'relative', zIndex: 1 }}>눌러보세요</span>
+          <motion.span key={k} className="rp-wave" style={{ left: px, top: py }} initial={{ scale: 0, opacity: 0.5 }} animate={{ scale: 6, opacity: 0 }} transition={{ duration: 0.9, ease: 'easeOut' }} />
+        </div>
+      </div>
+      <Cursor animate={{ x: 50 + px, y: 82 + py }} transition={{ duration: 0.3 }} />
+    </>
+  )
+}
+
+export function Shake() {
+  const k = useTick(2400)
+  return (
+    <div key={k} style={{ position: 'absolute', left: 50, right: 50, top: 46, display: 'grid', gap: 7 }}>
+      <span className="fl-label">비밀번호</span>
+      <motion.div className="tf" initial={{ x: 0, borderColor: '#e2ded5' }} animate={{ x: [0, -9, 9, -7, 7, -4, 4, 0], borderColor: '#ff4d4f' }} transition={{ duration: 0.5, delay: 0.6, borderColor: { delay: 0.6, duration: 0.1 } }}>
+        ••••••
+      </motion.div>
+      <motion.span className="tf-help" style={{ color: '#e5484d' }} initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}>
+        비밀번호가 틀렸어요
+      </motion.span>
+      <span className="btn-mini acc" style={{ justifyContent: 'center', padding: 8, marginTop: 4 }}>
+        로그인
+      </span>
+    </div>
+  )
+}
+
+export function Pulse() {
+  return (
+    <div className="center row" style={{ gap: 40 }}>
+      <div className="pl-wrap">
+        {[0, 1].map((i) => (
+          <motion.span key={i} className="pl-ring" animate={{ scale: [1, 2.4], opacity: [0.5, 0] }} transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.9, ease: 'easeOut' }} />
+        ))}
+        <span className="pl-core">
+          <Icon n="bell" size={18} color="#fff" />
+        </span>
+      </div>
+      <div className="pl-live">
+        <motion.i animate={{ opacity: [1, 0.25, 1] }} transition={{ duration: 1.2, repeat: Infinity }} />
+        LIVE
+      </div>
     </div>
   )
 }

@@ -108,3 +108,67 @@ export const CartIcon = ({ size = 26, color = C.ink }) => (
     <circle cx="17" cy="19.5" r="1.3" />
   </svg>
 )
+
+// 0 → len 까지 한 글자씩 늘었다가 잠시 멈추고 처음으로
+export function useTypeLoop(len, { speed = 120, hold = 1500, start = 600 } = {}) {
+  const [n, setN] = useState(0)
+  useEffect(() => {
+    let t
+    let i = 0
+    const step = () => {
+      if (i < len) {
+        i++
+        setN(i)
+        t = setTimeout(step, speed)
+      } else {
+        t = setTimeout(() => {
+          i = 0
+          setN(0)
+          t = setTimeout(step, start)
+        }, hold)
+      }
+    }
+    t = setTimeout(step, start)
+    return () => clearTimeout(t)
+  }, [len, speed, hold, start])
+  return n
+}
+
+const ICONS = {
+  home: 'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z',
+  search: 'M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM20 20l-3.5-3.5',
+  heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z',
+  user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0',
+  bell: 'M6 16v-5a6 6 0 1 1 12 0v5l2 2H4zM10 21a2 2 0 0 0 4 0',
+  mail: 'M3 6h18v12H3zM3 7l9 6 9-6',
+  plus: 'M12 5v14M5 12h14',
+  box: 'M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10',
+  folder: 'M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z',
+  file: 'M6 3h8l4 4v14H6zM14 3v4h4',
+  lock: 'M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3',
+  cloud: 'M7 18a5 5 0 1 1 1-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 8z',
+  globe: 'M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18',
+  server: 'M4 4h16v6H4zM4 14h16v6H4zM8 7h.01M8 17h.01',
+  laptop: 'M5 5h14v10H5zM2 19h20',
+  db: 'M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3',
+  gear: 'M12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1',
+  pen: 'M4 20h4L19 9l-4-4L4 16zM14 6l4 4',
+  image: 'M4 5h16v14H4zM4 16l5-5 4 4 3-3 4 4M15 9h.01',
+  x: 'M6 6l12 12M18 6L6 18',
+  updown: 'M8 9l4-4 4 4M8 15l4 4 4-4',
+}
+export const Icon = ({ n, size = 16, color = 'currentColor', w = 2, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" style={style}>
+    <path d={ICONS[n]} />
+  </svg>
+)
+
+export const Phone = ({ children, title = 'MyApp', right }) => (
+  <div className="phone">
+    <div className="ph-top">
+      <b>{title}</b>
+      {right}
+    </div>
+    {children}
+  </div>
+)
