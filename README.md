@@ -1,6 +1,6 @@
 # VIBE CODING HANDBOOK
 
-코딩을 몰라도 AI에게 정확히 말할 수 있도록, 바이브코딩에 자주 나오는 용어 96개를 **움직이는 카드**로 정리한 사이트입니다.
+코딩을 몰라도 AI에게 정확히 말할 수 있도록, 바이브코딩에 자주 나오는 용어 125개를 **움직이는 카드**로 정리한 사이트입니다.
 
 👉 **https://vibe-coding-handbook-xi.vercel.app/** 에서 바로 볼 수 있어요.
 
@@ -31,14 +31,23 @@
 | 글자와 그림 | Typewriter, Text Scramble, Split Text, Count-up, Line Drawing, Morphing, Marquee, Motion Path |
 | 화면과 마우스 | Page Transition, Shared Element, Pin·Scrollytelling, Horizontal Scroll, Magnetic Button, Custom Cursor, 3D Tilt, Confetti |
 
-### 개발 필수 상식 (22)
+### 개발 필수 상식 (40)
 
 | 분류 | 용어 |
 | --- | --- |
 | 파일·형식 | Markdown, README, JSON, .env, package.json |
 | 개념 | Frontend / Backend, API, Database, Component, State |
 | 도구·작업 | localhost · Port, Terminal, Commit, Branch, Push, npm install, Build, Deploy, Domain |
-| 문제 상황 | Console · Error, Cache, CORS |
+| GitHub | GitHub / Repository, Clone, Pull Request, Merge Conflict, Fork, .gitignore, GitHub Actions |
+| 기술 이름 | HTML / CSS / JavaScript, Library / Framework, TypeScript, Tailwind CSS, Node.js, Login / Auth, Dev / Production |
+| 문제 상황 | Console · Error, Cache, CORS, Bug / Debugging, Refactoring, Dependency Conflict, 404 / 500 |
+
+### AI 필수 용어 (11)
+
+| 분류 | 용어 |
+| --- | --- |
+| AI 기초 | LLM, Model, Prompt, Token, Context Window, Hallucination |
+| AI 도구 | Vibe Coding, AI Agent, AI Coding Tool, MCP, Rules 파일 |
 
 ## 내 컴퓨터에서 실행하기
 

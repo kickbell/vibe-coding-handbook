@@ -4,14 +4,14 @@ import { C, ease, useStep, useTick, L, Win, Icon, Check } from './parts'
 const sp = { type: 'spring', stiffness: 320, damping: 26 }
 
 // 움직이는 작은 라벨 (요청/응답 등)
-const Pkt = ({ children, color = C.sky, style, ...p }) => (
+export const Pkt = ({ children, color = C.sky, style, ...p }) => (
   <motion.span className="pkt" style={{ background: color, ...style }} {...p}>
     {children}
   </motion.span>
 )
 
 // 아이콘 상자 + 이름
-const Node = ({ icon, label, x, y, dark, color, children }) => (
+export const Node = ({ icon, label, x, y, dark, color, children }) => (
   <div className="node" style={{ left: x - 40, top: y }}>
     <div className={'node-box' + (dark ? ' dark' : '')} style={color ? { background: color, borderColor: color, color: '#fff' } : undefined}>
       {icon && <Icon n={icon} size={20} />}
@@ -21,7 +21,7 @@ const Node = ({ icon, label, x, y, dark, color, children }) => (
   </div>
 )
 
-const fadeIn = (delay) => ({ initial: { opacity: 0, y: 6 }, animate: { opacity: 1, y: 0 }, transition: { delay, duration: 0.3 } })
+export const fadeIn = (delay) => ({ initial: { opacity: 0, y: 6 }, animate: { opacity: 1, y: 0 }, transition: { delay, duration: 0.3 } })
 
 /* ───────── 파일·형식 ───────── */
 

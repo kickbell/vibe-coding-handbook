@@ -2,6 +2,8 @@ import * as U from './demos/ui'
 import * as B from './demos/ui2'
 import * as M from './demos/motion'
 import * as D from './demos/dev'
+import * as D2 from './demos/dev2'
+import * as A from './demos/ai'
 import { DESC } from './descriptions'
 
 // 설명(desc)은 descriptions.js에 따로 모아둔다.
@@ -216,6 +218,34 @@ export const GROUPS = [
         ],
       },
       {
+        id: 'github',
+        title: 'GitHub',
+        en: 'GitHub',
+        items: [
+          t('github-repo', 'GitHub / Repository', '코드를 올려두는 온라인 보관소', D2.GithubRepo, '이 프로젝트를 GitHub에 새 저장소(repository)로 올려줘. 저장소 이름은 my-app, README도 같이.', { aka: ['깃허브', '레포', '레포지토리', '저장소', 'repo'] }),
+          t('git-clone', 'Clone', '저장소 통째로 내려받기', D2.Clone, '이 GitHub 저장소를 내 컴퓨터에 clone해서 실행할 수 있게 해줘: (저장소 주소 붙여넣기)', { aka: ['클론', 'git clone', '내려받기', '복제'] }),
+          t('pull-request', 'Pull Request', '내 수정을 합쳐달라는 요청', D2.PullRequest, '지금 브랜치의 변경 사항으로 Pull Request를 만들어줘. 제목과 설명에 무엇을 왜 바꿨는지 정리해서.', { aka: ['PR', '풀 리퀘스트', '풀리퀘', '코드 리뷰', 'Merge Request'], adv: true }),
+          t('merge-conflict', 'Merge Conflict', '같은 줄을 고쳐서 생긴 충돌', D2.MergeConflict, 'merge하다가 충돌(conflict)이 났어. 충돌난 파일을 보여주고, 두 수정 중 어떤 걸 살릴지 설명해준 다음 해결해줘.', { aka: ['머지 충돌', '병합 충돌', '컨플릭트', 'conflict'], adv: true }),
+          t('fork', 'Fork', '남의 저장소를 내 계정으로 복사', D2.Fork, '이 오픈소스 저장소를 fork해서 내 계정에서 수정하고 싶어. fork한 다음 내 컴퓨터로 가져오는 순서를 알려줘.', { aka: ['포크', '복사', '내 계정으로 가져오기'], adv: true }),
+          t('gitignore', '.gitignore', 'GitHub에 안 올릴 파일 목록', D2.Gitignore, '.gitignore 파일을 만들어줘. .env, node_modules, dist, .DS_Store는 GitHub에 올라가지 않게.', { aka: ['깃이그노어', 'gitignore', '무시 목록', '제외 파일'] }),
+          t('github-actions', 'GitHub Actions', 'push하면 자동으로 돌아가는 작업', D2.GithubActions, 'main에 push할 때마다 자동으로 테스트하고 빌드하는 GitHub Actions 워크플로를 만들어줘.', { aka: ['깃허브 액션', '액션', 'CI/CD', 'CI', '워크플로', '자동화'], adv: true }),
+        ],
+      },
+      {
+        id: 'tech',
+        title: '기술 이름',
+        en: 'Tech Names',
+        items: [
+          t('html-css-js', 'HTML / CSS / JavaScript', '웹의 뼈대·옷·움직임', D2.HtmlCssJs, '간단한 소개 페이지를 HTML, CSS, JavaScript 파일 세 개로 나눠서 만들어줘. 버튼을 누르면 인사말이 바뀌게.', { aka: ['HTML', 'CSS', 'JavaScript', '자바스크립트', 'JS', '웹 기초'] }),
+          t('library-framework', 'Library / Framework', '골라 쓰는 도구 vs 정해진 틀', D2.LibraryFramework, '이 프로젝트에 라이브러리를 쓰는 게 나을지, Next.js 같은 프레임워크를 쓰는 게 나을지 장단점을 비교해서 추천해줘.', { aka: ['라이브러리', '프레임워크', 'React', '리액트', 'Next.js', '넥스트'] }),
+          t('typescript', 'TypeScript', '실수를 미리 잡아주는 JavaScript', D2.TypeScript, '이 프로젝트를 TypeScript로 바꿔줘. 타입 에러가 나는 곳은 하나씩 고쳐주고 무엇이 문제였는지 설명해줘.', { aka: ['타입스크립트', 'TS', '.ts', '타입'], adv: true }),
+          t('tailwind', 'Tailwind CSS', '이름표로 꾸미는 스타일', D2.Tailwind, '이 버튼 스타일을 Tailwind CSS 클래스로 바꿔줘. 주황 배경, 흰 글씨, 둥근 모양, 그림자.', { aka: ['테일윈드', 'Tailwind', '유틸리티 CSS', 'className'] }),
+          t('nodejs', 'Node.js', '내 컴퓨터에서 JS를 돌리는 엔진', D2.NodeJs, '이 프로젝트를 실행하려면 Node.js가 필요하다는데, 맥에 설치하는 방법과 설치됐는지 확인하는 명령어를 알려줘.', { aka: ['노드', '노드제이에스', 'node', 'nvm', '런타임'] }),
+          t('auth', 'Login / Auth', '로그인과 본인 확인', D2.LoginAuth, '이메일 로그인과 구글 소셜 로그인을 추가해줘. Supabase Auth를 쓰고, 로그인하면 헤더에 내 이름과 아바타가 보이게.', { aka: ['로그인', '회원가입', '인증', '소셜 로그인', 'OAuth', '세션'] }),
+          t('dev-production', 'Dev / Production', '연습용 환경 vs 실제 서비스', D2.DevProd, '개발 환경과 운영 환경을 나눠줘. API 주소와 키는 환경마다 다르게 .env.development, .env.production으로 관리하고.', { aka: ['개발 환경', '운영 환경', '프로덕션', '스테이징', '로컬', '배포 환경'], adv: true }),
+        ],
+      },
+      {
         id: 'problems',
         title: '문제 상황',
         en: 'Troubleshooting',
@@ -223,6 +253,43 @@ export const GROUPS = [
           t('console-error', 'Console · Error', '에러 메시지 확인하는 곳', D.ConsoleError, '화면이 하얗게 나와. 콘솔에 이런 에러가 떠: (에러 메시지 붙여넣기). 원인을 찾아서 고쳐줘.', { aka: ['콘솔', '에러', '오류', '개발자 도구', 'DevTools', 'F12', '디버깅'] }),
           t('cache', 'Cache', '한 번 받은 걸 저장해 두기', D.Cache, '코드를 고쳤는데 화면이 안 바뀌어. 캐시 문제인지 확인하는 방법과 강력 새로고침 방법을 알려줘.', { aka: ['캐시', '캐싱', '강력 새로고침', '새로고침'] }),
           t('cors', 'CORS', '다른 주소 요청 차단', D.Cors, '프론트에서 API를 부르면 CORS 에러가 나. 백엔드에서 내 사이트 주소(localhost:4000)를 허용하도록 고쳐줘.', { aka: ['코스', 'CORS 에러', 'CORS 오류', '교차 출처'], adv: true }),
+          t('bug-debugging', 'Bug / Debugging', '오류와 오류 찾기', D2.BugDebugging, '버튼을 눌러도 아무 반응이 없어. 디버깅해서 원인을 찾고, 무엇이 문제였는지 쉽게 설명한 다음 고쳐줘.', { aka: ['버그', '디버깅', '디버그', '오류 수정', '고장'] }),
+          t('refactoring', 'Refactoring', '동작은 그대로, 코드만 정리', D2.Refactoring, '화면 동작은 그대로 두고 코드만 리팩토링해줘. 중복된 부분은 컴포넌트로 빼고, 파일이 너무 길면 나눠서.', { aka: ['리팩토링', '리팩터링', '코드 정리', '클린 코드'], adv: true }),
+          t('dependency-conflict', 'Dependency Conflict', '부품끼리 버전이 안 맞음', D2.DependencyConflict, 'npm install 하면 버전 충돌(ERESOLVE) 에러가 나. 어떤 라이브러리끼리 부딪히는지 찾아서 맞는 버전으로 정리해줘.', { aka: ['의존성 충돌', '버전 충돌', 'ERESOLVE', 'peer dependency', '호환성'], adv: true }),
+          t('error-404-500', '404 / 500', '페이지 없음 vs 서버 고장', D2.ErrorPages, '없는 주소로 들어오면 보여줄 404 페이지를 만들어줘. "페이지를 찾을 수 없어요" 문구와 홈으로 가는 버튼을 넣어서.', { aka: ['404', '500', '에러 페이지', 'Not Found', '서버 오류', '상태 코드'] }),
+        ],
+      },
+    ],
+  },
+  {
+    id: 'ai',
+    short: 'AI',
+    title: 'AI 필수 용어',
+    intro: 'AI와 함께 만들 때 매일 듣지만 아무도 설명해주지 않는 말이에요. 알고 쓰면 AI를 훨씬 잘 다룰 수 있어요.',
+    sections: [
+      {
+        id: 'ai-basics',
+        title: 'AI 기초',
+        en: 'AI Basics',
+        items: [
+          t('llm', 'LLM', '말을 이어 쓰는 거대한 AI', A.Llm, 'LLM이 어떻게 답을 만드는지 비전공자도 알 수 있게 예시를 들어 설명해줘.', { aka: ['엘엘엠', '대규모 언어 모델', '언어 모델', 'ChatGPT', 'Claude', '챗봇'] }),
+          t('ai-model', 'Model', 'AI의 종류와 등급', A.Model, '간단한 문구 수정은 빠른 모델로, 복잡한 기능 개발은 가장 똑똑한 모델로 나눠 쓰고 싶어. 어떤 기준으로 고르면 될까?', { aka: ['모델', 'AI 모델', 'GPT', 'Opus', 'Sonnet', 'Haiku'] }),
+          t('prompt', 'Prompt', 'AI에게 하는 요청 문장', A.Prompt, '내가 쓴 요청을 더 구체적인 프롬프트로 다듬어줘: "버튼 예쁘게 만들어줘"', { aka: ['프롬프트', '프롬프트 엔지니어링', '지시문', '요청'] }),
+          t('token', 'Token', 'AI가 글을 세는 단위', A.Token, '지금 대화가 길어져서 토큰을 많이 쓰는 것 같아. 지금까지 결정한 내용을 짧게 요약해줘. 새 대화에 붙여넣을 수 있게.', { aka: ['토큰', '토큰 수', '사용량', '요금'], adv: true }),
+          t('context-window', 'Context Window', 'AI가 한 번에 기억하는 양', A.ContextWindow, '대화가 너무 길어져서 앞 내용을 잊는 것 같아. 지금까지 정한 규칙과 진행 상황을 요약해서 다시 기억해줘.', { aka: ['컨텍스트', '컨텍스트 윈도우', '문맥', '기억력', '대화 길이'], adv: true }),
+          t('hallucination', 'Hallucination', 'AI가 그럴듯하게 지어낸 말', A.Hallucination, '방금 알려준 라이브러리 함수가 실제로 있는 건지 공식 문서 기준으로 다시 확인해줘. 확실하지 않으면 모른다고 말해줘.', { aka: ['할루시네이션', '환각', '거짓 답변', '지어내기'] }),
+        ],
+      },
+      {
+        id: 'ai-tools',
+        title: 'AI 도구',
+        en: 'AI Tools',
+        items: [
+          t('vibe-coding', 'Vibe Coding', '말로 설명하며 만드는 개발', A.VibeCoding, '코딩을 몰라도 돼. 내가 원하는 걸 말하면 하나씩 만들어주고, 매 단계 무엇을 했는지 쉽게 설명해줘.', { aka: ['바이브코딩', '바이브 코딩', 'AI 코딩', '노코드'] }),
+          t('ai-agent', 'AI Agent', '스스로 일을 처리하는 AI', A.AiAgent, '로그인 버그를 고쳐줘. 관련 파일을 찾아보고, 고친 다음 직접 실행해서 확인하고, 무엇을 바꿨는지 보고해줘.', { aka: ['에이전트', 'AI 에이전트', '에이전틱', '자동 실행'] }),
+          t('ai-coding-tool', 'AI Coding Tool', 'AI가 들어간 코딩 프로그램', A.AiCodingTool, '이 프로젝트 구조를 먼저 훑어보고, 버튼 색을 주황색으로 바꾸는 데 어떤 파일을 고쳐야 하는지 알려준 다음 수정해줘.', { aka: ['Claude Code', '클로드 코드', 'Cursor', '커서', 'Copilot', 'AI 에디터'] }),
+          t('mcp', 'MCP', 'AI에 도구를 꽂는 표준 콘센트', A.Mcp, '노션 MCP를 연결해서, 노션에 정리된 기획 문서를 읽고 그대로 화면을 만들어줘.', { aka: ['엠씨피', 'Model Context Protocol', '커넥터', '도구 연결', '플러그인'], adv: true }),
+          t('rules-file', 'Rules 파일', 'AI에게 미리 주는 작업 규칙', A.RulesFile, '이 프로젝트용 CLAUDE.md를 만들어줘. 항상 한국어로 답하기, 커밋 전에 빌드 확인, 색은 주황색 계열만 쓰기 규칙을 넣어서.', { aka: ['CLAUDE.md', '.cursorrules', 'AGENTS.md', '규칙 파일', '시스템 프롬프트', '메모리'] }),
         ],
       },
     ],
