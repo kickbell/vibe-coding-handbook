@@ -6,6 +6,8 @@ import { EFFECT_PGS } from './effects'
 import { MOTION_PGS } from './motion'
 import { TEXT_PGS } from './text'
 import { SCREEN_PGS } from './screen'
+import { UI_LAYOUT_PGS } from './ui-layout'
+import { UI_INPUT_PGS } from './ui-input'
 
 const EASE_OUT = [0.22, 1, 0.36, 1]
 const PALETTE = ['#4D9CFF', '#FF7A59', '#2EC4A0', '#FFC43D', '#FF6FA5']
@@ -349,4 +351,6 @@ export const PLAYGROUNDS = {
   ...MOTION_PGS,
   ...TEXT_PGS,
   ...SCREEN_PGS,
+  ...UI_LAYOUT_PGS,
+  ...UI_INPUT_PGS,
 }

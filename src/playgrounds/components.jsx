@@ -486,11 +486,8 @@ function ToastPG() {
 
   const fire = (kind) => {
     const id = ++seq.current
-    setToasts((ts) => {
-      const next = [...ts, { id, kind, top: pos === 'top' }]
-      if (next.length > max) push('close', `최대 ${max}개 넘어서 가장 오래된 토스트 제거`)
-      return next.slice(-max)
-    })
+    if (toasts.length >= max) push('close', `최대 ${max}개 넘어서 가장 오래된 토스트 제거`)
+    setToasts((ts) => [...ts, { id, kind, top: pos === 'top' }].slice(-max))
     push('open', `토스트 #${id}: ${TOAST_KIND[kind].msg}`)
   }
   // ToastItem 타이머가 의존하므로 매 렌더 새로 만들지 않는다
