@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { motion, AnimatePresence, animate, useAnimate, useMotionValue, useMotionValueEvent, useTransform } from 'motion/react'
+import { motion, AnimatePresence, animate, useAnimate, useMotionValue, useTransform } from 'motion/react'
 import { Shell, EventLog, useEventLog, Slider, Segmented, Toggle } from '../components/kit'
 import { C, PALETTE, ease, Check, CartIcon, Icon } from '../demos/parts'
 
