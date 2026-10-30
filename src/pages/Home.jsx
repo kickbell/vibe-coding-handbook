@@ -106,7 +106,6 @@ export default function Home() {
           </section>
         ))}
 
-        <footer className="foot">바이브코딩 용어 도감 · React + Motion으로 만들었어요</footer>
       </main>
     </>
   )

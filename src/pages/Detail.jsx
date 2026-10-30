@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'motion/react'
-import { TERMS, getTerm } from '../terms'
+import { getTerm } from '../terms'
 import { Stage } from '../demos/parts'
 import { PromptBox } from '../components/kit'
 import { PLAYGROUNDS } from '../playgrounds'
@@ -23,9 +23,6 @@ export default function Detail() {
 
   const { Demo } = term
   const Playground = term.playground && PLAYGROUNDS[term.playground]
-  const idx = TERMS.indexOf(term)
-  const prev = TERMS[idx - 1]
-  const next = TERMS[idx + 1]
   const related = term.section.items.filter((x) => x !== term).slice(0, 4)
 
   return (
@@ -35,14 +32,14 @@ export default function Detail() {
           <Link to="/" className="logo">
             VIBE CODING HANDBOOK
           </Link>
-          <Link to={`/#${term.section.id}`} className="back">
-            ← 전체 용어
-          </Link>
         </div>
       </header>
 
       <main className="wrap detail" key={term.id}>
         <motion.div className="detail-head" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+          <Link to={`/#${term.section.id}`} className="back">
+            ← 전체 용어
+          </Link>
           <span className="crumb">
             {term.group.title} · {term.section.title} <span className="mono">{term.no}</span>
           </span>
@@ -67,23 +64,6 @@ export default function Detail() {
             <PromptBox text={term.prompt} />
           </section>
         )}
-
-        <nav className="pn">
-          {prev ? (
-            <Link to={`/term/${prev.id}`}>
-              <span>← 이전</span>
-              <b>{prev.en}</b>
-            </Link>
-          ) : (
-            <span />
-          )}
-          {next && (
-            <Link to={`/term/${next.id}`} className="pn-next">
-              <span>다음 →</span>
-              <b>{next.en}</b>
-            </Link>
-          )}
-        </nav>
 
         <section className="detail-block">
           <h2>같은 분류의 다른 용어</h2>
