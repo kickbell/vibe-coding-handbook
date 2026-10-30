@@ -1,0 +1,33 @@
+# 조직 저장소(november16th)의 main에 push되면 개인 fork(kickbell)의 main에도 그대로 push한다.
+#
+# 필요한 설정 (조직 저장소 › Settings › Secrets and variables › Actions):
+#   FORK_PUSH_TOKEN  kickbell 계정에서 만든 Fine-grained token
+#                    · Repository access: kickbell/vibe-coding-handbook 하나만
+#                    · Permissions: Contents (Read and write), Workflows (Read and write)
+name: Sync to personal fork
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    # fork 쪽에도 이 파일이 복사되므로, 조직 저장소에서만 실행
+    if: github.repository == 'november16th/vibe-coding-handbook'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Push main to kickbell/vibe-coding-handbook
+        env:
+          TOKEN: ${{ secrets.FORK_PUSH_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::FORK_PUSH_TOKEN 시크릿이 없어요. 조직 저장소 Settings > Secrets에 추가해주세요."
+            exit 1
+          fi
+          git push "https://x-access-token:${TOKEN}@github.com/kickbell/vibe-coding-handbook.git" HEAD:refs/heads/main
