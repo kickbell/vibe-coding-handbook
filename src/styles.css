@@ -89,7 +89,7 @@ button { font-family: inherit; }
 .crumb .mono { color: var(--faint); margin-left: 4px; }
 .detail-head h1 { font-size: clamp(40px, 6vw, 62px); font-weight: 800; letter-spacing: -0.04em; margin: 8px 0 2px; line-height: 1.1; }
 .detail-ko { font-size: 20px; font-weight: 700; color: var(--acc); margin: 6px 0 12px; }
-.detail-aka { margin: -8px 0 16px; font-size: 15px; font-weight: 600; color: var(--acc); opacity: 0.85; line-height: 1.6; }
+.detail-aka { margin: -8px 0 16px; font-size: 15px; font-weight: 500; color: var(--muted); line-height: 1.6; }
 .detail-ko .lv { margin-left: 8px; vertical-align: 3px; }
 .detail-desc { font-size: 17px; line-height: 1.8; color: #45423c; margin: 0; text-align: left; word-break: keep-all; overflow-wrap: break-word; text-wrap: pretty; }
 .detail-block { margin-top: 36px; }
