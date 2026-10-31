@@ -22,6 +22,21 @@ function Step({ no, title, img, alt, layout = 'side', children }) {
   )
 }
 
+const Tip = ({ children }) => <p className="guide-tip">✅ {children}</p>
+
+// 개발자 도구 여는 단계는 여러 안내에서 같이 쓴다
+const OpenStep = ({ no = 1, children }) => (
+  <Step no={no} title="개발자 도구 열기" img="/devtools/1-open-devtools.png" alt="크롬 오른쪽 위 점 세 개 메뉴에서 도구 더보기, 개발자 도구를 차례로 누르는 화면" layout="tall">
+    <p>
+      크롬 오른쪽 위 ① <b>⋮</b> → ② <b>도구 더보기</b> → ③ <b>개발자 도구</b>를 누르면 화면 옆에 코드 창이 열려요.
+    </p>
+    <p className="guide-key">
+      단축키: Mac <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd> · Windows <kbd>F12</kbd>
+    </p>
+    {children}
+  </Step>
+)
+
 /* ───────── 가짜 은행·증권 앱 + 콘솔 ───────── */
 
 // 격리된 iframe 안에서 명령을 eval하고 결과를 부모에게 돌려준다
@@ -215,19 +230,14 @@ const ASK = `<a href="https://signinssl.gmarket.co.kr/login/login?url=https%3A%2
 function DevToolsGuide() {
   return (
     <div className="guide">
-      <Step no={1} title="개발자 도구 열기" img="/devtools/1-open-devtools.png" alt="크롬 오른쪽 위 점 세 개 메뉴에서 도구 더보기, 개발자 도구를 차례로 누르는 화면" layout="tall">
-        <p>
-          크롬 오른쪽 위 ① <b>⋮</b> → ② <b>도구 더보기</b> → ③ <b>개발자 도구</b>를 누르면 화면 옆에 코드 창이 열려요.
-        </p>
-        <p className="guide-key">
-          단축키: Mac <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd> · Windows <kbd>F12</kbd>
-        </p>
-      </Step>
+      <OpenStep />
       <Step no={2} title="수정하고 싶은 부분 선택하기" img="/devtools/2-pick-element.png" alt="요소 선택 버튼을 누르고 화면의 로그인 글자를 클릭하자 해당 코드 줄이 강조된 화면" layout="wide">
         <p>
           ① 개발자 도구 왼쪽 위의 <b>요소 선택 버튼(↖)</b>을 누르고, ② 화면에서 고치고 싶은 곳을 클릭하세요. ③ 그 부분의 코드 한 줄이 오른쪽에 강조돼요.
         </p>
-        <p className="guide-tip">더 빠른 방법: 고칠 곳을 바로 우클릭 → <b>검사</b></p>
+        <Tip>
+          더 빠른 방법: 고칠 곳을 바로 우클릭 → <b>검사</b>
+        </Tip>
       </Step>
       <Step no={3} title="요소 복사하기" img="/devtools/3-copy-element.png" alt="강조된 코드 줄을 우클릭해 복사, 요소 복사를 고르는 화면">
         <p>
@@ -249,7 +259,7 @@ function DevToolsGuide() {
         <p>
           개발자 도구의 <b>콘솔</b> 탭에 명령어를 붙여넣고 Enter를 누르면, 화면의 "로그인"이 바로 <b>"홍길동 로그인 됨"</b>으로 바뀌어요.
         </p>
-        <p className="guide-tip">내 화면에서만 잠깐 바뀐 거예요. 새로고침하면 원래대로 돌아오고, 사이트의 진짜 코드는 그대로예요. 진짜로 고치려면 4번처럼 AI에게 "코드를 고쳐줘"라고 부탁하세요.</p>
+        <Tip>내 화면에서만 잠깐 바뀐 거예요. 새로고침하면 원래대로 돌아오고, 사이트의 진짜 코드는 그대로예요. 진짜로 고치려면 4번처럼 AI에게 "코드를 고쳐줘"라고 부탁하세요.</Tip>
       </Step>
       <Step no={7} title="직접 해보기: 콘솔로 부자 되기">
         <p>
@@ -267,7 +277,43 @@ function DevToolsGuide() {
           </li>
         </ul>
         <RichSim />
-        <p className="guide-tip">바뀐 건 내 화면뿐이라 새로고침하면 원래대로 돌아오고, 실제 돈은 1원도 늘지 않아요. 이렇게 만든 화면으로 남을 속이는 건 절대 안 돼요.</p>
+        <Tip>바뀐 건 내 화면뿐이라 새로고침하면 원래대로 돌아오고, 실제 돈은 1원도 늘지 않아요. 이렇게 만든 화면으로 남을 속이는 건 절대 안 돼요.</Tip>
+      </Step>
+    </div>
+  )
+}
+
+/* ───────── Console · Error ───────── */
+
+const ERR_ASK = '화면이 하얗게 나와. 개발자 도구 콘솔에 이런 빨간 에러가 떠: (에러 메시지 붙여넣기) 위치: (파일 이름:줄 번호). 원인을 찾아서 고쳐줘.'
+
+function ConsoleGuide() {
+  return (
+    <div className="guide">
+      <OpenStep>
+        <Tip>
+          콘솔로 바로 가는 단축키: Mac <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>J</kbd> · Windows <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>J</kbd>
+        </Tip>
+      </OpenStep>
+      <Step no={2} title="콘솔 탭에서 빨간 줄 찾기" img="/devtools/6-run-in-console.png" alt="개발자 도구 위쪽의 콘솔 탭을 누르자 빨간 에러 줄이 보이는 화면" layout="wide">
+        <p>
+          개발자 도구 위쪽 탭 중 <b>콘솔</b>을 누르세요. 여기 쌓인 줄 가운데 <b className="err-red">빨간 ✕ 줄이 에러</b>, <b className="err-yellow">노란 ⚠ 줄이 경고</b>예요. 오른쪽 위 숫자(✕ 2, ! 2)는 에러와 경고의 개수예요.
+        </p>
+        <Tip>
+          에러가 안 보이면 콘솔을 연 채로 <b>새로고침</b>하세요. 페이지가 열리는 순간 나는 에러는 콘솔을 연 다음에만 찍혀요.
+        </Tip>
+      </Step>
+      <Step no={3} title="에러 메시지와 위치를 복사하기">
+        <p>
+          빨간 줄에는 두 가지가 들어 있어요. 왼쪽은 <b>무엇이 고장 났는지</b>(예: <code>Uncaught TypeError: Cannot read properties of undefined</code>), 오른쪽 끝은 <b>어디서 났는지</b>(예: <code>Cart.jsx:12</code> → Cart.jsx 파일의 12번째 줄)예요. 빨간 줄을 마우스로 끝까지 드래그해서 둘 다 복사하세요.
+        </p>
+        <Tip>
+          위치가 <code>chrome-extension://</code>으로 시작하거나 내 프로젝트에 없는 파일이면, 내 코드가 아니라 크롬 확장 프로그램의 에러예요. 이런 줄은 무시해도 돼요.
+        </Tip>
+      </Step>
+      <Step no={4} title="AI에게 그대로 붙여넣기">
+        <p>에러 메시지는 컴퓨터가 남긴 정확한 고장 기록이라, "화면이 이상해요"보다 AI가 훨씬 빨리 원인을 찾아요. 메시지를 고치거나 줄이지 말고 그대로 붙여넣으세요.</p>
+        <PromptBox text={ERR_ASK} />
       </Step>
     </div>
   )
@@ -275,4 +321,5 @@ function DevToolsGuide() {
 
 export const GUIDES = {
   devtools: DevToolsGuide,
+  'console-error': ConsoleGuide,
 }

@@ -42,8 +42,8 @@
 | 도구·작업 | localhost · Port, Terminal, Commit, Branch, Push, npm install, Build, Deploy, Domain |
 | GitHub | GitHub / Repository, Clone, Pull Request, Merge Conflict, Fork, .gitignore, GitHub Actions |
 | 기술 이름 | HTML / CSS / JavaScript, Library / Framework, TypeScript, Tailwind CSS, Node.js, Login / Auth, Dev / Production |
-| 문제 상황 | Console · Error, Cache, CORS, Bug / Debugging, Refactoring, Dependency Conflict, 404 / 500 |
-| 개발자 도구 | DevTools |
+| 문제 상황 | Cache, CORS, Bug / Debugging, Refactoring, Dependency Conflict, 404 / 500 |
+| 개발자 도구 | DevTools, Console · Error |
 
 ### AI 필수 용어 (11)
 

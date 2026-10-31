@@ -58,12 +58,7 @@ export default function Detail() {
             <h2>직접 해보기</h2>
             <Playground />
           </section>
-        ) : Guide ? (
-          <section className="detail-block">
-            <h2>실제 크롬 브라우저를 열고 따라 해보기</h2>
-            <Guide />
-          </section>
-        ) : (
+        ) : Guide ? null : (
           <section className="detail-block">
             <div className="detail-demo">
               <Stage className="big">
@@ -75,7 +70,15 @@ export default function Detail() {
           </section>
         )}
 
-        {related.length > 0 && (
+        {Guide && (
+          <section className="detail-block">
+            <h2>실제 크롬 브라우저를 열고 따라 해보기</h2>
+            <Guide />
+          </section>
+        )}
+
+        {/* 따라 해보기 안내가 있는 화면은 안내로 끝낸다 */}
+        {!Guide && related.length > 0 && (
           <section className="detail-block">
             <h2>같은 분류의 다른 용어</h2>
             <div className="grid">

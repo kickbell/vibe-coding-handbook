@@ -252,7 +252,6 @@ export const GROUPS = [
         title: '문제 상황',
         en: 'Troubleshooting',
         items: [
-          t('console-error', 'Console · Error', '에러 메시지 확인하는 곳', D.ConsoleError, '화면이 하얗게 나와. 콘솔에 이런 에러가 떠: (에러 메시지 붙여넣기). 원인을 찾아서 고쳐줘.', { aka: ['콘솔', '에러', '오류', '개발자 도구', 'DevTools', 'F12', '디버깅'] }),
           t('cache', 'Cache', '한 번 받은 걸 저장해 두기', D.Cache, '코드를 고쳤는데 화면이 안 바뀌어. 캐시 문제인지 확인하는 방법과 강력 새로고침 방법을 알려줘.', { aka: ['캐시', '캐싱', '강력 새로고침', '새로고침'] }),
           t('cors', 'CORS', '다른 주소 요청 차단', D.Cors, '프론트에서 API를 부르면 CORS 에러가 나. 백엔드에서 내 사이트 주소(localhost:4000)를 허용하도록 고쳐줘.', { aka: ['코스', 'CORS 에러', 'CORS 오류', '교차 출처'] }),
           t('bug-debugging', 'Bug / Debugging', '오류와 오류 찾기', D2.BugDebugging, '버튼을 눌러도 아무 반응이 없어. 디버깅해서 원인을 찾고, 무엇이 문제였는지 쉽게 설명한 다음 고쳐줘.', { aka: ['버그', '디버깅', '디버그', '오류 수정', '고장'] }),
@@ -267,6 +266,7 @@ export const GROUPS = [
         en: 'DevTools',
         items: [
           t('devtools', 'DevTools', '화면을 콕 집어 AI에게 알려주기', D2.DevTools, '(개발자 도구에서 복사한 요소 붙여넣기) 이 부분의 글자를 "홍길동 로그인 됨"으로 바꾸고 싶어. 개발자 도구 콘솔에서 입력할 수 있는 명령어를 알려줘.', { aka: ['개발자 도구', '요소 검사', 'Inspect', '요소 복사', '콘솔', 'F12'] }),
+          t('console-error', 'Console · Error', '에러 메시지 확인하는 곳', D.ConsoleError, '화면이 하얗게 나와. 콘솔에 이런 에러가 떠: (에러 메시지 붙여넣기). 원인을 찾아서 고쳐줘.', { aka: ['콘솔', '에러', '오류', '개발자 도구', 'DevTools', 'F12', '디버깅'] }),
         ],
       },
     ],

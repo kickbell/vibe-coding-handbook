@@ -1125,7 +1125,10 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .guide-no { font-size: 11.5px; font-weight: 700; color: var(--acc); letter-spacing: 0.06em; }
 .guide-key { color: var(--muted); font-size: 13.5px !important; }
 .guide-key kbd { font-family: var(--mono); font-size: 12px; background: #f3f0ea; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; color: var(--ink); }
-.guide-tip { font-size: 13.5px !important; color: var(--muted); background: var(--demo); border-radius: 12px; padding: 9px 13px; }
+.guide-tip { font-size: 14.5px !important; font-weight: 600; color: var(--ink); background: #fff3ea; border: 1px solid #ffd2b8; border-left: 4px solid var(--acc); border-radius: 12px; padding: 11px 14px; line-height: 1.65 !important; }
+.guide-tip kbd { font-family: var(--mono); font-size: 12px; background: #fff; border: 1px solid #ffd2b8; border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; }
+.err-red { color: #d23c41; }
+.err-yellow { color: #a87a00; }
 .guide-img { display: block; justify-self: center; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--demo); cursor: zoom-in; }
 .guide-img img { display: block; max-width: 100%; height: auto; }
 .guide-step.is-side .guide-img img { max-height: 460px; }
