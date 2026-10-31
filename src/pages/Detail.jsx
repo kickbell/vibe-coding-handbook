@@ -4,6 +4,7 @@ import { getTerm } from '../terms'
 import { Stage } from '../demos/parts'
 import { PromptBox } from '../components/kit'
 import { PLAYGROUNDS } from '../playgrounds'
+import { GUIDES } from '../guides'
 import { TermCard } from './Home'
 
 export default function Detail() {
@@ -23,6 +24,7 @@ export default function Detail() {
 
   const { Demo } = term
   const Playground = term.playground && PLAYGROUNDS[term.playground]
+  const Guide = GUIDES[term.id]
   const related = term.section.items.filter((x) => x !== term).slice(0, 4)
 
   return (
@@ -65,6 +67,13 @@ export default function Detail() {
             </div>
             <p className="soon">이 용어의 직접 조작 화면은 준비 중이에요. 지금은 움직임을 보고 프롬프트를 복사해 쓸 수 있어요.</p>
             <PromptBox text={term.prompt} />
+          </section>
+        )}
+
+        {Guide && (
+          <section className="detail-block">
+            <h2>실제 크롬에서는 이렇게</h2>
+            <Guide />
           </section>
         )}
 
