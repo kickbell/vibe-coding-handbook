@@ -58,6 +58,11 @@ export default function Detail() {
             <h2>직접 해보기</h2>
             <Playground />
           </section>
+        ) : Guide ? (
+          <section className="detail-block">
+            <h2>실제 크롬에서는 이렇게</h2>
+            <Guide />
+          </section>
         ) : (
           <section className="detail-block">
             <div className="detail-demo">
@@ -67,13 +72,6 @@ export default function Detail() {
             </div>
             <p className="soon">이 용어의 직접 조작 화면은 준비 중이에요. 지금은 움직임을 보고 프롬프트를 복사해 쓸 수 있어요.</p>
             <PromptBox text={term.prompt} />
-          </section>
-        )}
-
-        {Guide && (
-          <section className="detail-block">
-            <h2>실제 크롬에서는 이렇게</h2>
-            <Guide />
           </section>
         )}
 

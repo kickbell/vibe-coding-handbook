@@ -266,8 +266,7 @@ export const GROUPS = [
         title: '개발자 도구',
         en: 'DevTools',
         items: [
-          t('inspect-element', 'Inspect Element', '화면 속 그 부분을 콕 집어 알려주기', D2.InspectElement, '개발자 도구에서 복사한 아래 요소(화면에 "₩19,000"이라고 보이는 가격)를 더 크고 굵게 바꿔줘. <p class="price">₩19,000</p>', { aka: ['요소 검사', '검사', '요소 선택', 'Elements', '선택자', 'selector', 'Copy selector', '요소 복사', '개발자 도구', 'DevTools', 'F12'] }),
-          t('console-edit', 'Edit in Console', '화면 숫자를 즉석에서 바꿔보기', D2.ConsoleEdit, '개발자 도구 콘솔로 매출 숫자를 "₩123,456,789,000"으로 바꿔보니 카드 밖으로 넘쳐. 숫자가 길어져도 카드 안에 들어가도록 고쳐줘.', { aka: ['콘솔', 'Console', 'document.querySelector', 'textContent', 'contentEditable', '값 바꾸기', '개발자 도구', 'DevTools'] }),
+          t('devtools', 'DevTools', '화면을 콕 집어 AI에게 알려주기', D2.DevTools, '(개발자 도구에서 복사한 요소 붙여넣기) 이 부분의 글자를 "홍길동 로그인 됨"으로 바꾸고 싶어. 개발자 도구 콘솔에서 입력할 수 있는 명령어를 알려줘.', { aka: ['개발자 도구', '요소 검사', 'Inspect', '요소 복사', '콘솔', 'F12'] }),
         ],
       },
     ],
