@@ -10,6 +10,7 @@ import { UI_LAYOUT_PGS } from './ui-layout'
 import { UI_INPUT_PGS } from './ui-input'
 import { SIM_DEV_PGS } from './sim-dev'
 import { SIM_GIT_AI_PGS } from './sim-git-ai'
+import { DEVTOOLS_PGS } from './sim-devtools'
 
 const EASE_OUT = [0.22, 1, 0.36, 1]
 const PALETTE = ['#4D9CFF', '#FF7A59', '#2EC4A0', '#FFC43D', '#FF6FA5']
@@ -357,4 +358,5 @@ export const PLAYGROUNDS = {
   ...UI_INPUT_PGS,
   ...SIM_DEV_PGS,
   ...SIM_GIT_AI_PGS,
+  ...DEVTOOLS_PGS,
 }

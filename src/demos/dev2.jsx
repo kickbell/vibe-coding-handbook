@@ -630,3 +630,83 @@ export function ErrorPages() {
     </Win>
   )
 }
+
+/* ───────── 개발자 도구 ───────── */
+
+const Cursor = (p) => (
+  <motion.svg className="ie-d-cursor" viewBox="0 0 16 16" width="16" height="16" {...p}>
+    <path d="M2 1.5l11 5.2-4.6 1.4L6.6 13z" fill={C.ink} stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
+  </motion.svg>
+)
+
+export function InspectElement() {
+  const s = useStep(3, 1500)
+  return (
+    <Win style={{ inset: '14px 18px' }}>
+      <div className="navbar" style={{ height: 22 }}>
+        <span className="mono" style={{ fontSize: 8.5, color: '#8a857b' }}>
+          myshop.site
+        </span>
+      </div>
+      <div className="ie-d-page">
+        <L w={110} h={8} c="#d8d3c8" />
+        <L w={74} h={5} c="#e7e3da" />
+        <div className="ie-d-cards">
+          {['₩9,000', '₩19,000'].map((p, i) => (
+            <div key={p} className="ie-d-card">
+              <L w={34} h={5} c="#d8d3c8" />
+              <span className="ie-d-price">
+                {p}
+                {i === 1 && (
+                  <motion.i className="ie-d-box" initial={false} animate={{ opacity: s >= 1 ? 1 : 0 }}>
+                    <span className="mono">p.price</span>
+                  </motion.i>
+                )}
+              </span>
+              <span className="ie-d-btn" />
+            </div>
+          ))}
+        </div>
+      </div>
+      <Cursor initial={false} animate={s === 0 ? { x: 40, y: 150 } : { x: 172, y: 96 }} transition={{ duration: s === 0 ? 0 : 0.6, ease: 'easeInOut' }} />
+      <AnimatePresence>
+        {s === 2 && (
+          <motion.span className="chip ie-d-copied mono" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+            복사됨 · &lt;p class="price"&gt;₩19,000&lt;/p&gt;
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </Win>
+  )
+}
+
+export function ConsoleEdit() {
+  const s = useStep(4, 1400)
+  const edited = s === 2
+  return (
+    <Win style={{ inset: '14px 18px' }}>
+      <div className="ce-d-page">
+        <span>오늘의 매출</span>
+        <motion.b key={edited ? 'y' : 'n'} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0, color: edited ? C.acc : C.ink }} transition={{ duration: 0.3 }}>
+          {edited ? '₩9,999,999' : '₩1,240,000'}
+        </motion.b>
+        <AnimatePresence>
+          {s === 3 && (
+            <motion.span className="chip" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              ↻ 새로고침하면 원래대로
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </div>
+      <div className="ce-d-console mono">
+        <span className="ce-d-tab">Console</span>
+        <div className="ce-d-line">
+          <span>›</span>
+          <motion.span className="ce-d-cmd" initial={false} animate={{ clipPath: s === 1 || s === 2 ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)' }} transition={{ duration: s === 1 ? 0.9 : 0, ease: 'linear' }}>
+            $('.revenue').textContent = '₩9,999,999'
+          </motion.span>
+        </div>
+      </div>
+    </Win>
+  )
+}

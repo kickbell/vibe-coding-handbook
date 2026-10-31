@@ -261,6 +261,15 @@ export const GROUPS = [
           t('error-404-500', '404 / 500', '페이지 없음 vs 서버 고장', D2.ErrorPages, '없는 주소로 들어오면 보여줄 404 페이지를 만들어줘. "페이지를 찾을 수 없어요" 문구와 홈으로 가는 버튼을 넣어서.', { aka: ['404', '500', '에러 페이지', 'Not Found', '서버 오류', '상태 코드'] }),
         ],
       },
+      {
+        id: 'devtools',
+        title: '개발자 도구',
+        en: 'DevTools',
+        items: [
+          t('inspect-element', 'Inspect Element', '화면 속 그 부분을 콕 집어 알려주기', D2.InspectElement, '개발자 도구에서 복사한 아래 요소(화면에 "₩19,000"이라고 보이는 가격)를 더 크고 굵게 바꿔줘. <p class="price">₩19,000</p>', { aka: ['요소 검사', '검사', '요소 선택', 'Elements', '선택자', 'selector', 'Copy selector', '요소 복사', '개발자 도구', 'DevTools', 'F12'] }),
+          t('console-edit', 'Edit in Console', '화면 숫자를 즉석에서 바꿔보기', D2.ConsoleEdit, '개발자 도구 콘솔로 매출 숫자를 "₩123,456,789,000"으로 바꿔보니 카드 밖으로 넘쳐. 숫자가 길어져도 카드 안에 들어가도록 고쳐줘.', { aka: ['콘솔', 'Console', 'document.querySelector', 'textContent', 'contentEditable', '값 바꾸기', '개발자 도구', 'DevTools'] }),
+        ],
+      },
     ],
   },
   {
