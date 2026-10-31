@@ -1072,7 +1072,10 @@ function ConsoleErrorPG() {
   const add = (product) => {
     if (!fixed && !product) {
       setEntries((e) => [...e, { t: 'error', s: "Uncaught TypeError: Cannot read properties of undefined (reading 'price')", at: 'at addToCart (Cart.jsx:12:24)' }])
-      return push('close', '버튼이 반응 없음 → 콘솔에 빨간 오류')
+      // 진짜 개발자 도구 콘솔에도 같은 에러를 남긴다 (화면은 멈추지 않게 이벤트 밖에서)
+      setTimeout(() => product.price)
+      push('close', '버튼이 반응 없음 → 콘솔에 빨간 오류')
+      return push('option', '진짜 개발자 도구(F12) 콘솔에도 같은 에러가 찍혔어요')
     }
     setCount((c) => c + 1)
     setEntries((e) => [...e, { t: 'log', s: `장바구니에 담음: ${product ? product.name : '(상품 없음, 건너뜀)'}` }])
