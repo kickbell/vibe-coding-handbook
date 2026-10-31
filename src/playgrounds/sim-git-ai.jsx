@@ -663,7 +663,7 @@ function PromptPG() {
 
   return (
     <Shell
-      hint="오른쪽에서 정보를 하나씩 더해보세요"
+      hint="아래에서 정보를 하나씩 더해보세요"
       stage={
         <div className="pg-prompt">
           <div className="pg-prompt-meter">

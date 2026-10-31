@@ -32,7 +32,7 @@ function HeroSectionPG() {
 
   return (
     <Shell
-      hint="버튼을 눌러보고 오른쪽 값을 바꿔보세요"
+      hint="버튼을 눌러보고 아래 값을 바꿔보세요"
       stage={
         <div className="pg-page">
           <div className="pg-page-nav">

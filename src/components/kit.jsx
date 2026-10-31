@@ -124,10 +124,10 @@ export function Shell({ stage, controls, log, prompt, hint }) {
           {stage}
           {hint && <span className="pg-hint">{hint}</span>}
         </div>
-        <div className="pg-controls">{controls}</div>
+        {log}
       </div>
       <div className="pg-bottom">
-        {log}
+        <div className="pg-controls">{controls}</div>
         <PromptBox text={prompt} />
       </div>
     </div>

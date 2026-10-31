@@ -61,7 +61,7 @@ function TypewriterPG() {
 
   return (
     <Shell
-      hint="오른쪽에서 문장을 바꿔보세요"
+      hint="아래에서 문장을 바꿔보세요"
       stage={
         <div className="pg-col" onClick={() => setRun((r) => r + 1)}>
           <span className="pg-big">

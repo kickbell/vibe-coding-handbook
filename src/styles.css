@@ -120,11 +120,12 @@ button { font-family: inherit; }
 
 /* 플레이그라운드 */
 .pg { display: grid; gap: 16px; }
-.pg-main { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 16px; }
+/* 아랫줄도 윗줄과 같은 열 너비: 조절판 = 무대, 프롬프트 = 이벤트 로그 */
+.pg-main, .pg-bottom { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 16px; }
 .pg-stage { position: relative; background: var(--demo); border: 1px solid var(--line); border-radius: 26px; padding: 56px 28px 32px; min-height: 400px; display: flex; align-items: center; justify-content: center; }
 .pg-hint { position: absolute; top: 14px; left: 16px; font-size: 12px; font-weight: 600; color: var(--muted); background: #fff; padding: 5px 11px; border-radius: 99px; border: 1px solid var(--line); }
 .pg-controls { background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 22px; display: flex; flex-direction: column; gap: 20px; }
-.pg-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+.pg-main > .log { border-radius: 26px; }
 .ctl { display: grid; gap: 9px; font-size: 14px; font-weight: 600; }
 .ctl-top { display: flex; justify-content: space-between; align-items: center; }
 .ctl-top .mono { color: var(--acc); font-size: 13px; }
@@ -1113,7 +1114,13 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
 }
 
 @media (max-width: 860px) {
-  .pg-main, .pg-bottom { grid-template-columns: 1fr; }
+  /* 좁은 화면: 무대 → 조절판 → 로그 → 프롬프트 순으로 쌓는다 */
+  .pg { display: flex; flex-direction: column; }
+  .pg-main, .pg-bottom { display: contents; }
+  .pg-stage { order: 1; }
+  .pg-controls { order: 2; }
+  .pg-main > .log { order: 3; }
+  .pg-bottom > .prompt { order: 4; }
 }
 @media (max-width: 640px) {
   .topbar-in { padding: 10px 16px; }
