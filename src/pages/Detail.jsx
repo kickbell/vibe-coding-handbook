@@ -60,7 +60,7 @@ export default function Detail() {
           </section>
         ) : Guide ? (
           <section className="detail-block">
-            <h2>실제 크롬에서는 이렇게</h2>
+            <h2>실제 크롬 브라우저를 열고 따라 해보기</h2>
             <Guide />
           </section>
         ) : (
@@ -75,14 +75,16 @@ export default function Detail() {
           </section>
         )}
 
-        <section className="detail-block">
-          <h2>같은 분류의 다른 용어</h2>
-          <div className="grid">
-            {related.map((t) => (
-              <TermCard key={t.id} term={t} />
-            ))}
-          </div>
-        </section>
+        {related.length > 0 && (
+          <section className="detail-block">
+            <h2>같은 분류의 다른 용어</h2>
+            <div className="grid">
+              {related.map((t) => (
+                <TermCard key={t.id} term={t} />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </>
   )

@@ -83,27 +83,36 @@ header{display:flex;align-items:baseline;gap:8px;padding:22px 20px 8px}header h1
 <div class="more">전체보기</div>
 <div class="menu"><div>주문내역<span>이번 달 3건 ›</span></div><div>판매수익<span class="sold">이번 달 +12,400원 ›</span></div><div>배당금<span>이번 달 1,820원 ›</span></div></div>${BRIDGE}`
 
+// 칸에 입력한 값을 바꿀 화면 요소들
 const APPS = {
   bank: {
     label: 'XX뱅크 · 내 자산',
     doc: BANK,
-    presets: [
-      ['총자산 바꾸기', "document.querySelector('.total-asset').textContent = '2,446,063,347원'"],
-      ['통장 잔액 바꾸기', "document.querySelector('#main .balance').textContent = '370,000,000원'"],
-      ['지금 총자산 읽기', "document.querySelector('.total-asset').textContent"],
+    fields: [
+      { label: '총자산', sel: '.total-asset', unit: '원', hint: '예: 1000억' },
+      { label: 'XX뱅크 통장', sel: '#main .balance', unit: '원', hint: '예: 3억' },
+      { label: '저축예금', sel: '#savings .balance', unit: '원', hint: '예: 5000만' },
     ],
   },
   stock: {
     label: 'XX증권 · 내 주식',
     doc: STOCK,
-    presets: [
-      ['내 투자 금액 바꾸기', "document.querySelector('.my-invest').textContent = '5,111,920,000원'"],
-      ['수익 바꾸기', "document.querySelector('.profit').textContent = '+1,221,522,000원 (31.3%)'"],
-      ['보유 주식 수 바꾸기', "document.querySelector('.shares').textContent = '2,512주'"],
+    fields: [
+      { label: '내 투자', sel: '.my-invest', unit: '원', hint: '예: 51억' },
+      { label: '수익', sel: '.profit', unit: '', hint: '예: +12억 (31.3%)' },
+      { label: '보유 주식 수', sel: '.shares', unit: '주', hint: '예: 2512' },
     ],
   },
 }
 const EDIT = ['화면 글자 직접 고치기', 'document.body.contentEditable = true']
+
+// 숫자만 입력하면 쉼표와 단위를 붙이고, "1000억"처럼 쓰면 단위만 붙인다
+const withUnit = (v, unit) => {
+  const t = v.trim()
+  if (/^[\d,]+$/.test(t)) return Number(t.replace(/,/g, '')).toLocaleString('ko-KR') + unit
+  return unit && !t.endsWith(unit) ? t + unit : t
+}
+const setText = (sel, text) => `document.querySelector('${sel}').textContent = '${text.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`
 
 function RichSim() {
   const frame = useRef(null)
@@ -112,6 +121,7 @@ function RichSim() {
   const [gen, setGen] = useState(0)
   const [lines, setLines] = useState([])
   const [input, setInput] = useState('')
+  const [vals, setVals] = useState({})
 
   useEffect(() => {
     const on = (e) => {
@@ -131,6 +141,10 @@ function RichSim() {
     frame.current.contentWindow.postMessage({ cmd }, '*')
     setInput('')
   }
+  const apply = (f) => {
+    const v = vals[f.sel] ?? ''
+    if (v.trim()) run(setText(f.sel, withUnit(v, f.unit)))
+  }
   const reload = (note) => {
     setGen((g) => g + 1)
     setLines((l) => [...l, { k: 'nav', s: note }])
@@ -148,15 +162,24 @@ function RichSim() {
           onChange={(v) => {
             setApp(v)
             setLines([])
+            setVals({})
           }}
           options={Object.entries(APPS).map(([value, a]) => ({ value, label: a.label }))}
         />
-        <div className="rich-presets">
-          {[...APPS[app].presets, EDIT].map(([label, cmd]) => (
-            <button key={label} className="chip-btn" onClick={() => run(cmd)}>
-              {label}
-            </button>
+        <div className="rich-fields">
+          <span className="rich-cap">숫자를 입력하고 Enter</span>
+          {APPS[app].fields.map((f) => (
+            <label key={f.sel} className="rich-field">
+              <span>{f.label}</span>
+              <input value={vals[f.sel] ?? ''} onChange={(e) => setVals((o) => ({ ...o, [f.sel]: e.target.value }))} onKeyDown={(e) => e.key === 'Enter' && apply(f)} placeholder={f.hint} />
+              <button className="btn small" onClick={() => apply(f)}>
+                바꾸기
+              </button>
+            </label>
           ))}
+          <button className="chip-btn rich-edit" onClick={() => run(EDIT[1])}>
+            {EDIT[0]}
+          </button>
         </div>
         <div className="pg-con-panel mono">
           <div className="pg-con-tabs">
@@ -164,7 +187,7 @@ function RichSim() {
             <b>콘솔</b>
           </div>
           <div className="pg-con-list rich-list" ref={listRef}>
-            {lines.length === 0 && <div className="pg-con-row dim">위 버튼을 누르거나, 아래에 명령을 입력하고 Enter</div>}
+            {lines.length === 0 && <div className="pg-con-row dim">위 칸에 숫자를 넣거나, 맨 아래 › 칸에 명령을 직접 입력하고 Enter</div>}
             {lines.map((l, i) => (
               <div key={i} className={'pg-con-row rich-' + l.k + (l.k === 'err' ? ' error' : '')}>
                 <span>{{ in: '›', out: '‹', err: '✕', nav: '↻' }[l.k]}</span>
@@ -174,7 +197,7 @@ function RichSim() {
           </div>
           <label className="rich-input">
             <span>›</span>
-            <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && run(input)} placeholder={APPS[app].presets[0][1]} spellCheck={false} autoCapitalize="off" />
+            <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && run(input)} placeholder={setText(APPS[app].fields[0].sel, '1000억원')} spellCheck={false} autoCapitalize="off" />
           </label>
         </div>
         <button className="btn small" onClick={() => reload('새로고침함 — 바꾼 숫자가 모두 원래대로')}>
@@ -230,8 +253,19 @@ function DevToolsGuide() {
       </Step>
       <Step no={7} title="직접 해보기: 콘솔로 부자 되기">
         <p>
-          같은 방법이면 은행·증권 화면의 숫자도 바꿀 수 있어요. 아래 가짜 앱에서 버튼을 누르거나 명령을 직접 입력해보세요. <b>화면 글자 직접 고치기</b>를 누르면 숫자를 클릭해서 바로 고칠 수도 있어요.
+          같은 방법이면 은행·증권 화면의 숫자도 바꿀 수 있어요. 아래 가짜 앱에서 직접 바꿔보세요.
         </p>
+        <ul className="guide-list">
+          <li>
+            칸에 원하는 숫자(예: <b>100000000000</b> 또는 <b>1000억</b>)를 입력하고 <b>Enter</b>를 누르면, 그 값으로 바꾸는 명령이 콘솔에 찍히고 화면이 바로 바뀌어요.
+          </li>
+          <li>
+            콘솔 창 맨 아래 <b>›</b> 칸에 명령을 직접 입력해도 돼요.
+          </li>
+          <li>
+            <b>화면 글자 직접 고치기</b>를 누르면 앱 화면의 숫자를 클릭해서 키보드로 바로 고칠 수도 있어요.
+          </li>
+        </ul>
         <RichSim />
         <p className="guide-tip">바뀐 건 내 화면뿐이라 새로고침하면 원래대로 돌아오고, 실제 돈은 1원도 늘지 않아요. 이렇게 만든 화면으로 남을 속이는 건 절대 안 돼요.</p>
       </Step>
