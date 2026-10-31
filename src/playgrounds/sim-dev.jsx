@@ -1060,103 +1060,6 @@ function ErrorPagesPG() {
   )
 }
 
-/* ───────── Console Error ───────── */
-
-function ConsoleErrorPG() {
-  const [fixed, setFixed] = useState(false)
-  const [entries, setEntries] = useState([])
-  const [count, setCount] = useState(0)
-  const [level, setLevel] = useState('all')
-  const { logs, push, clear } = useEventLog()
-
-  const add = (product) => {
-    if (!fixed && !product) {
-      setEntries((e) => [...e, { t: 'error', s: "Uncaught TypeError: Cannot read properties of undefined (reading 'price')", at: 'at addToCart (Cart.jsx:12:24)' }])
-      // 진짜 개발자 도구 콘솔에도 같은 에러를 남긴다 (화면은 멈추지 않게 이벤트 밖에서)
-      setTimeout(() => product.price)
-      push('close', '버튼이 반응 없음 → 콘솔에 빨간 오류')
-      return push('option', '진짜 개발자 도구(F12) 콘솔에도 같은 에러가 찍혔어요')
-    }
-    setCount((c) => c + 1)
-    setEntries((e) => [...e, { t: 'log', s: `장바구니에 담음: ${product ? product.name : '(상품 없음, 건너뜀)'}` }])
-    push('end', fixed && !product ? '고친 코드: 상품이 없으면 조용히 건너뜀' : '정상 동작')
-  }
-  const warn = () => {
-    setEntries((e) => [...e, { t: 'warn', s: 'Warning: Each child in a list should have a unique "key" prop.', at: 'at ProductList (List.jsx:8)' }])
-    push('option', '노란 경고 추가 (앱은 동작하지만 고치면 좋은 것)')
-  }
-  const shown = entries.filter((e) => level === 'all' || e.t === 'error')
-  const lastErr = [...entries].reverse().find((e) => e.t === 'error')
-
-  const prompt = lastErr
-    ? `"장바구니 담기" 버튼을 누르면 아무 반응이 없고, 콘솔(Console)에 이런 빨간 오류가 나와:\n${lastErr.s}\n${lastErr.at}\n원인을 찾아서 고쳐줘. 상품 정보가 없을 때도 앱이 멈추지 않게 해줘.`
-    : `브라우저 개발자 도구의 콘솔(Console)을 여는 방법(F12 또는 Cmd+Option+J)과, 빨간 오류(Error)와 노란 경고(Warning)의 차이를 알려줘. 오류가 나면 메시지와 파일 이름·줄 번호를 그대로 복사해서 너에게 보내면 되지?`
-
-  return (
-    <Shell
-      hint="'품절 상품 담기'를 눌러 오류를 내보세요"
-      stage={
-        <div className="pg-con">
-          <div className="pg-page pg-con-app">
-            <div className="pg-page-nav">
-              <b>MyShop</b>
-              <span>🛒 {count}</span>
-            </div>
-            <div className="pg-row" style={{ gap: 8, padding: 16 }}>
-              <button className="btn small" onClick={() => add({ name: '티셔츠' })}>
-                티셔츠 담기
-              </button>
-              <button className="btn small ghost" onClick={() => add(undefined)}>
-                품절 상품 담기
-              </button>
-            </div>
-          </div>
-          <div className="pg-con-panel mono">
-            <div className="pg-con-tabs">
-              <b>Console</b>
-              <span>{entries.filter((e) => e.t === 'error').length} errors</span>
-              <span>{entries.filter((e) => e.t === 'warn').length} warnings</span>
-            </div>
-            <div className="pg-con-list">
-              {shown.length === 0 && <div className="pg-con-row dim">콘솔이 깨끗해요</div>}
-              {shown.map((e, i) => (
-                <motion.div key={i} className={'pg-con-row ' + e.t} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}>
-                  <span>{e.t === 'error' ? '✕' : e.t === 'warn' ? '⚠' : '›'}</span>
-                  <div>
-                    {e.s}
-                    {e.at && <small>{e.at}</small>}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      }
-      controls={
-        <>
-          <Toggle
-            label="버그 고친 코드로 바꾸기"
-            value={fixed}
-            onChange={(v) => {
-              setFixed(v)
-              push('option', v ? 'product?.price 로 고침 (없으면 건너뜀)' : '버그 있는 코드로 되돌림')
-            }}
-          />
-          <Segmented label="콘솔에 보이는 것" value={level} onChange={setLevel} options={[{ value: 'all', label: '전부' }, { value: 'error', label: '오류만' }]} />
-          <button className="chip-btn" onClick={warn}>
-            경고(Warning) 하나 만들기
-          </button>
-          <button className="link" onClick={() => setEntries([])}>
-            콘솔 지우기
-          </button>
-        </>
-      }
-      log={<EventLog logs={logs} onClear={clear} />}
-      prompt={prompt}
-    />
-  )
-}
-
 /* ───────── HTML · CSS · JS ───────── */
 
 const HTML0 = '<h1>안녕하세요</h1>\n<p>바이브코딩 첫 페이지</p>\n<button id="btn">눌러보세요</button>'
@@ -1324,7 +1227,6 @@ export const SIM_DEV_PGS = {
   cache: CachePG,
   cors: CorsPG,
   'error-404-500': ErrorPagesPG,
-  'console-error': ConsoleErrorPG,
   'html-css-js': HtmlCssJsPG,
   tailwind: TailwindPG,
 }

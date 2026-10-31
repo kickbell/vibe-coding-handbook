@@ -285,7 +285,7 @@ function DevToolsGuide() {
 
 /* ───────── Console · Error ───────── */
 
-const ERR_ASK = '화면이 하얗게 나와. 개발자 도구 콘솔에 이런 빨간 에러가 떠: (에러 메시지 붙여넣기) 위치: (파일 이름:줄 번호). 원인을 찾아서 고쳐줘.'
+const ERR_ASK = '(콘솔에서 복사한 에러 붙여넣기) 이런 에러가 발생했어. 원인을 찾아서 고쳐주고, 무엇이 문제였는지 쉽게 설명해줘.'
 
 function ConsoleGuide() {
   return (
@@ -295,24 +295,25 @@ function ConsoleGuide() {
           콘솔로 바로 가는 단축키: Mac <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>J</kbd> · Windows <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>J</kbd>
         </Tip>
       </OpenStep>
-      <Step no={2} title="콘솔 탭에서 빨간 줄 찾기" img="/devtools/6-run-in-console.png" alt="개발자 도구 위쪽의 콘솔 탭을 누르자 빨간 에러 줄이 보이는 화면" layout="wide">
+      <Step no={2} title="콘솔 탭에서 에러 메시지 복사하기" img="/devtools/console-2-copy-error.png" alt="개발자 도구의 콘솔 탭을 누르고 빨간 에러 줄을 우클릭해 콘솔 복사를 고르는 화면" layout="wide">
         <p>
-          개발자 도구 위쪽 탭 중 <b>콘솔</b>을 누르세요. 여기 쌓인 줄 가운데 <b className="err-red">빨간 ✕ 줄이 에러</b>, <b className="err-yellow">노란 ⚠ 줄이 경고</b>예요. 오른쪽 위 숫자(✕ 2, ! 2)는 에러와 경고의 개수예요.
+          ① 개발자 도구 위쪽 탭 중 <b>콘솔</b>을 누르세요. 여기 쌓인 줄 가운데 <b className="err-red">빨간 ✕ 줄이 에러</b>, <b className="err-yellow">노란 ⚠ 줄이 경고</b>예요. 빨간 줄에는 <b>무엇이 고장 났는지</b>(<code>Uncaught TypeError: …</code>)와 <b>어디서 났는지</b>(<code>sim-dev.jsx:1076</code> → 그 파일의 1076번째 줄)가 함께 적혀 있어요.
+        </p>
+        <p>
+          ② 빨간 줄 위에서 <b>우클릭</b> → <b>콘솔 복사</b>를 누르면 에러 메시지와 위치가 한 번에 복사돼요.
         </p>
         <Tip>
           에러가 안 보이면 콘솔을 연 채로 <b>새로고침</b>하세요. 페이지가 열리는 순간 나는 에러는 콘솔을 연 다음에만 찍혀요.
         </Tip>
-      </Step>
-      <Step no={3} title="에러 메시지와 위치를 복사하기">
-        <p>
-          빨간 줄에는 두 가지가 들어 있어요. 왼쪽은 <b>무엇이 고장 났는지</b>(예: <code>Uncaught TypeError: Cannot read properties of undefined</code>), 오른쪽 끝은 <b>어디서 났는지</b>(예: <code>Cart.jsx:12</code> → Cart.jsx 파일의 12번째 줄)예요. 빨간 줄을 마우스로 끝까지 드래그해서 둘 다 복사하세요.
-        </p>
         <Tip>
           위치가 <code>chrome-extension://</code>으로 시작하거나 내 프로젝트에 없는 파일이면, 내 코드가 아니라 크롬 확장 프로그램의 에러예요. 이런 줄은 무시해도 돼요.
         </Tip>
       </Step>
-      <Step no={4} title="AI에게 그대로 붙여넣기">
-        <p>에러 메시지는 컴퓨터가 남긴 정확한 고장 기록이라, "화면이 이상해요"보다 AI가 훨씬 빨리 원인을 찾아요. 메시지를 고치거나 줄이지 말고 그대로 붙여넣으세요.</p>
+      <Step no={3} title="AI 에이전트에게 수정하라고 시키기" img="/devtools/console-3-ask-ai.png" alt="AI 채팅 입력창에 복사한 에러 메시지를 붙여넣고 고쳐달라고 적은 화면">
+        <p>
+          복사한 내용을 AI 에이전트에게 <b>그대로 붙여넣고</b> 한 줄만 덧붙이면 돼요. 에러 메시지는 컴퓨터가 남긴 정확한 고장 기록이라, "화면이 이상해요"보다 AI가 훨씬 빨리 원인을 찾아요.
+        </p>
+        <Tip>메시지를 고치거나 줄이지 마세요. 파일 이름과 줄 번호(<code>sim-dev.jsx:1076</code>)가 AI에게는 고칠 곳의 정확한 주소예요.</Tip>
         <PromptBox text={ERR_ASK} />
       </Step>
     </div>
