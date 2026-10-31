@@ -323,7 +323,8 @@ function ConsoleGuide() {
   )
 }
 
+// title이 없으면 제목 없이 안내만 보여준다 (에러가 나야 볼 수 있는 상황처럼 따라 할 수 없는 경우)
 export const GUIDES = {
-  devtools: DevToolsGuide,
-  'console-error': ConsoleGuide,
+  devtools: { Guide: DevToolsGuide, title: '실제 크롬 브라우저를 열고 따라 해보기' },
+  'console-error': { Guide: ConsoleGuide },
 }

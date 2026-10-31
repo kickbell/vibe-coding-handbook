@@ -24,7 +24,7 @@ export default function Detail() {
 
   const { Demo } = term
   const Playground = term.playground && PLAYGROUNDS[term.playground]
-  const Guide = GUIDES[term.id]
+  const { Guide, title: guideTitle } = GUIDES[term.id] ?? {}
   const related = term.section.items.filter((x) => x !== term).slice(0, 4)
 
   return (
@@ -72,7 +72,7 @@ export default function Detail() {
 
         {Guide && (
           <section className="detail-block">
-            <h2>실제 크롬 브라우저를 열고 따라 해보기</h2>
+            {guideTitle && <h2>{guideTitle}</h2>}
             <Guide />
           </section>
         )}
