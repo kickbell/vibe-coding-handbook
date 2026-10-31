@@ -1132,10 +1132,13 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .guide-text .prompt p { overflow-wrap: anywhere; }
 
 /* 7단계 실습: 가짜 은행·증권 앱과 콘솔 */
-.rich { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 20px; align-items: start; background: var(--demo); border-radius: 20px; padding: 20px; margin: 4px 0; }
+.rich { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 20px; align-items: stretch; background: var(--demo); border-radius: 20px; padding: 20px; margin: 4px 0; }
 .rich-phone { border: 8px solid var(--ink); border-radius: 34px; overflow: hidden; background: #fff; height: 560px; }
 .rich-phone iframe { display: block; width: 100%; height: 100%; border: 0; }
-.rich-side { display: grid; gap: 14px; align-content: start; min-width: 0; }
+/* 오른쪽 칸을 휴대폰 높이에 맞추고, 남는 높이는 콘솔 목록이 채운다 */
+.rich-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.rich-side > * { flex-shrink: 0; }
+.rich-side > .pg-con-panel { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; }
 .rich-fields { display: grid; gap: 8px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
 .rich-cap { font-size: 12px; font-weight: 700; color: var(--acc); }
 .rich-field { display: grid; grid-template-columns: 84px minmax(0, 1fr) auto; gap: 8px; align-items: center; }
@@ -1144,7 +1147,7 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .rich-field input:focus { border-color: var(--acc); background: #fff; }
 .rich-edit { justify-self: start; margin-top: 2px; }
 .guide-list { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 15px; line-height: 1.7; }
-.rich-list { min-height: 170px; max-height: 240px; }
+.rich-list { flex: 1 1 0; min-height: 60px; max-height: none; }
 .rich-in > span { color: #4d9cff; font-weight: 800; }
 .rich-out { color: var(--muted); }
 .rich-nav { color: var(--faint); background: #f6f4ef; }
@@ -1156,6 +1159,8 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
   .guide-step.is-side, .guide-step.is-tall, .rich { grid-template-columns: minmax(0, 1fr); }
   .guide-step.is-tall .guide-img { justify-self: center; max-width: 560px; }
   .rich-phone { justify-self: center; width: min(320px, 100%); }
+  .rich-side > .pg-con-panel { flex: none; }
+  .rich-list { flex: none; min-height: 170px; max-height: 240px; }
   /* 좁은 화면: 무대 → 조절판 → 로그 → 프롬프트 순으로 쌓는다 */
   .pg { display: flex; flex-direction: column; }
   .pg-main, .pg-bottom { display: contents; }
